@@ -1,39 +1,36 @@
-# Manual interactivo DSpace · Sesión 1
+# Manual interactivo DSpace · Sesión 1 · V3
 
-Versión actualizada con:
+Actualizaciones de esta versión V3.1:
 
-- Sección ilustrada para creación de comunidades.
-- Sección ilustrada para edición de comunidades.
-- Espacios para reemplazar imágenes por capturas reales.
-- Enlaces a documentación de Lyrasis/DSpace.
-- Introducción ampliada a metadatos, esquemas, Dublin Core y formularios.
-- Quiz y checklist.
+- Encabezado general fijo con estilo similar a la referencia visual.
+- Tarjeta de "Objetivo del material" con ícono relacionado al objetivo.
+- Sección de comunidades, subcomunidades y colecciones rediseñada con base en la imagen de referencia.
+- Se mantienen las secciones de creación, edición, metadatos, formularios, recursos y actividad.
+- Se incluye la imagen de referencia de jerarquía en `public/images/jerarquia-guia.png`.
 
-## Cómo reemplazar imágenes
+## Estructura importante
 
-Las imágenes están en:
+- `index.html`
+- `main.jsx`
+- `styles.css`
+- `package.json`
+- `public/images`
 
-`public/images/`
-
-Puedes reemplazar los archivos SVG por capturas reales manteniendo el mismo nombre:
-
-- 01-login.svg
-- 02-nueva-comunidad.svg
-- 03-seleccionar-padre.svg
-- 04-formulario-comunidad.svg
-- 05-confirmacion.svg
-- 06-editar-menu.svg
-- 07-icono-lapiz.svg
-- 08-pestanas-edicion.svg
-- 09-control-acceso.svg
-
-También puedes cambiar las rutas dentro de `main.jsx`.
-
-## Vercel
-
-Configuración recomendada:
+## Publicación en Vercel
 
 - Framework: Vite
 - Build command: npm run build
 - Output directory: dist
 - Install command: npm install
+
+## Personalización futura
+
+Si quieres, después podemos:
+- cambiar colores a la identidad de eScire;
+- añadir más capturas reales del repositorio;
+- convertir la portada en una portada más institucional;
+- agregar botones de descarga o recursos PDF.
+
+## Ajuste V3.1
+
+La tarjeta de **Objetivo del material** queda como bloque independiente al inicio del manual, no integrada dentro del apartado de contenidos a revisar.

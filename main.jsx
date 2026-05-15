@@ -20,7 +20,7 @@ import {
   Image as ImageIcon,
   ExternalLink,
   FormInput,
-  Tags,
+  Target,
   LibraryBig,
   KeyRound
 } from "lucide-react";
@@ -37,35 +37,12 @@ const sections = [
   { id: "actividad", title: "Actividad final", icon: Trophy },
 ];
 
-const hierarchyCards = [
-  {
-    label: "Comunidad",
-    description: "Primer nivel visible del repositorio. Puede representar una facultad, instituto, centro, departamento amplio o área institucional.",
-    example: "Ejemplo: Facultad de Ciencias Sociales",
-  },
-  {
-    label: "Subcomunidad",
-    description: "Nivel opcional que ayuda a organizar una comunidad cuando existe una estructura interna clara. No debe usarse si solo complica la navegación.",
-    example: "Ejemplo: Departamento de Sociología",
-  },
-  {
-    label: "Colección",
-    description: "Nivel donde se depositan los ítems. Agrupa contenidos con una lógica documental, administrativa o temática.",
-    example: "Ejemplo: Artículos científicos, Tesis, Datos de investigación",
-  },
-  {
-    label: "Ítem",
-    description: "Unidad básica de información. Incluye metadatos, uno o más archivos, licencias y condiciones de acceso.",
-    example: "Ejemplo: Un artículo con PDF, resumen, autores, fecha y palabras clave",
-  },
-];
-
 const createImageSteps = [
   {
     title: "1. Iniciar sesión",
     text: "Entra con una cuenta que tenga permisos de administración. Si no ves el menú de administración, solicita revisión de permisos.",
     image: "/images/01-login.svg",
-    alt: "Captura de pantalla sugerida: ventana de inicio de sesión en DSpace"
+    alt: "Captura sugerida: ventana de inicio de sesión en DSpace"
   },
   {
     title: "2. Abrir Nuevo → Comunidad",
@@ -284,27 +261,40 @@ function SectionButton({ section, active, onClick }) {
   );
 }
 
-function FlipCard({ item }) {
-  const [open, setOpen] = useState(false);
+function TopTrainingHeader() {
   return (
-    <motion.button onClick={() => setOpen(!open)} className="flipCard" whileHover={{ scale: 1.02 }}>
-      <div className="flipHeader">
-        <h3>{item.label}</h3>
-        {open ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+    <div className="trainingHeader">
+      <div className="trainingHeaderOverlay" />
+      <div className="trainingHeaderContent">
+        <div>
+          <p className="miniLabel">Material didáctico</p>
+          <h1>Formación operativa<br />en repositorio DSpace</h1>
+        </div>
+        <div className="headerDecor">
+          <div className="mockLaptop">
+            <div className="mockScreen"></div>
+            <div className="mockTrackpad"></div>
+          </div>
+          <div className="hexWrap">
+            {Array.from({ length: 8 }).map((_, i) => <span key={i}></span>)}
+          </div>
+        </div>
       </div>
-      <AnimatePresence mode="wait">
-        {!open ? (
-          <motion.p key="hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="muted">
-            Toca para ver qué significa este nivel dentro del repositorio.
-          </motion.p>
-        ) : (
-          <motion.div key="content" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}>
-            <p>{item.description}</p>
-            <p className="example">{item.example}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.button>
+    </div>
+  );
+}
+
+function ObjectiveCard() {
+  return (
+    <div className="objectiveCard">
+      <div className="objectiveIcon"><Target size={34} /></div>
+      <div>
+        <h3>Objetivo del material</h3>
+        <p>
+          Al finalizar este tema, la persona participante comprenderá cómo se organiza la información dentro de un repositorio DSpace, qué función cumplen las comunidades, subcomunidades, colecciones e ítems, y cómo se relacionan con los metadatos, los esquemas, los formularios de depósito y el estándar Dublin Core.
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -337,7 +327,7 @@ function MetadataConcepts() {
         <p>Son conjuntos organizados de campos. En DSpace pueden coexistir Dublin Core, DataCite, MODS u otros esquemas institucionales.</p>
       </div>
       <div className="softBox concept">
-        <Tags />
+        <BookOpen />
         <h4>Dublin Core</h4>
         <p>Es el esquema más común para describir recursos digitales. En DSpace se usa con campos como dc.title, dc.subject o dc.contributor.author.</p>
       </div>
@@ -423,14 +413,25 @@ function App() {
   const CurrentIcon = current.icon;
 
   const titles = {
-    inicio: "Manual interactivo · Sesión 1",
-    jerarquia: "Comunidades, subcomunidades y colecciones",
-    crear: "Proceso ilustrado: crear una comunidad",
-    editar: "Proceso ilustrado: editar una comunidad",
-    metadatos: "Introducción a metadatos, esquemas y Dublin Core",
-    formularios: "Formularios en el repositorio",
-    recursos: "Enlaces oficiales y documentación",
-    actividad: "Actividad de cierre",
+    inicio: "Manual 1. Comunidades, subcomunidades y colecciones; introducción a metadatos, esquemas y formularios.",
+    jerarquia: "1. Establecimiento de una organización jerárquica.",
+    crear: "2. Proceso ilustrado: crear una comunidad.",
+    editar: "3. Proceso ilustrado: editar una comunidad.",
+    metadatos: "4. Introducción a metadatos, esquemas y Dublin Core.",
+    formularios: "5. Formularios en el repositorio.",
+    recursos: "6. Recursos oficiales y documentación de apoyo.",
+    actividad: "7. Actividad de cierre.",
+  };
+
+  const subtitles = {
+    inicio: "Introducción a metadatos, esquemas, formularios y Dublin Core",
+    jerarquia: "La navegación y organización en DSpace sigue una jerarquía.",
+    crear: "Pasos guiados para crear una comunidad o subcomunidad.",
+    editar: "Acciones y pestañas clave para administrar una comunidad.",
+    metadatos: "Conceptos fundamentales para describir y recuperar información.",
+    formularios: "Cómo se capturan los metadatos durante el depósito.",
+    recursos: "Enlaces útiles para profundizar después de la sesión.",
+    actividad: "Consolida lo aprendido con un ejercicio y autoevaluación.",
   };
 
   const nextSection = () => setActive(sections[Math.min(currentIndex + 1, sections.length - 1)].id);
@@ -442,7 +443,7 @@ function App() {
         <aside className="sidebar">
           <Card>
             <div className="badge"><Sparkles size={14} /> DSpace 7</div>
-            <h1>Comunidades, colecciones y metadatos</h1>
+            <h2 className="sidebarTitle">Navegación del manual</h2>
             <p className="muted">Material de refuerzo para capacitación.</p>
             <ProgressBar currentIndex={currentIndex} />
             <nav>
@@ -454,53 +455,52 @@ function App() {
         </aside>
 
         <main className="main">
-          <motion.div key={active + "header"} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="hero">
-            <div className="heroIcon"><CurrentIcon size={30} /></div>
+          <TopTrainingHeader />
+
+          <motion.div key={active + "header"} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="sectionHero">
+            <div className="sectionHeroIcon"><CurrentIcon size={30} /></div>
             <div>
-              <p>Tema 1</p>
               <h2>{titles[active]}</h2>
+              <p>{subtitles[active]}</p>
             </div>
           </motion.div>
 
           <AnimatePresence mode="wait">
             {active === "inicio" && (
-              <motion.section key="inicio" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
+              <motion.section key="inicio" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="stack">
+                <ObjectiveCard />
                 <Card>
-                  <h3>¿Qué vamos a aprender?</h3>
+                  <h3>¿Qué revisaremos durante este manual?</h3>
                   <p>
-                    En esta sesión conocerás cómo se organiza un repositorio DSpace, cómo se crean y administran comunidades,
-                    y por qué los metadatos son esenciales para que los contenidos sean recuperables, comprensibles e interoperables.
+                    Este material se organiza en bloques breves para reforzar lo visto durante la capacitación:
+                    estructura jerárquica del repositorio, creación y edición de comunidades, metadatos,
+                    esquemas, Dublin Core y formularios de depósito.
                   </p>
                   <div className="pillGrid">
-                    {["Organizar", "Depositar", "Describir", "Encontrar"].map((word) => <div key={word}>{word}</div>)}
-                  </div>
-                  <div className="callout amber">
-                    <strong>Idea clave</strong>
-                    <p>Una buena administración del repositorio no consiste solo en cargar archivos. Consiste en construir una arquitectura clara de información.</p>
-                  </div>
-                  <div className="callout blue">
-                    <strong>Novedad de esta versión</strong>
-                    <p>Se agregaron espacios para capturas de pantalla, enlaces oficiales de consulta y una sección ampliada de metadatos, esquemas, Dublin Core y formularios.</p>
+                    {["Organizar", "Depositar", "Describir", "Configurar"].map((word) => <div key={word}>{word}</div>)}
                   </div>
                 </Card>
               </motion.section>
             )}
 
             {active === "jerarquia" && (
-              <motion.section key="jerarquia" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
+              <motion.section key="jerarquia" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="stack">
                 <Card>
-                  <div className="flow">
-                    <span>Comunidad</span><ChevronRight /><span>Subcomunidad</span><ChevronRight /><span>Colección</span><ChevronRight /><span>Ítem</span>
+                  <p className="introLine">La navegación y organización en DSpace sigue una jerarquía:</p>
+                  <div className="fullIllustration">
+                    <img src="/images/jerarquia-guia.png" alt="Esquema visual de comunidad, subcomunidad, colección e ítem" />
                   </div>
-                  <p>Toca cada tarjeta para revisar la función de cada nivel dentro de la jerarquía.</p>
-                  <div className="grid2">
-                    {hierarchyCards.map((item) => <FlipCard key={item.label} item={item} />)}
-                  </div>
-                  <div className="callout rose">
-                    <strong>Buena práctica</strong>
-                    <p>Evita crear jerarquías demasiado profundas. Prioriza estructuras claras, sostenibles y orientadas a la búsqueda.</p>
-                  </div>
+                  <ul className="bulletList">
+                    <li><strong>Comunidad:</strong> es el primer nivel visible en un repositorio y representa unidades organizativas como facultades, institutos o departamentos. Contiene subcomunidades y colecciones.</li>
+                    <li><strong>Subcomunidad:</strong> es un nivel opcional que organiza mejor el repositorio dentro de una comunidad. Ejemplo: Facultad de Ciencias Sociales y su Departamento de Sociología.</li>
+                    <li><strong>Colección:</strong> es el espacio donde se depositan ítems, como documentos y archivos. Ejemplos: artículos científicos, tesis o material audiovisual.</li>
+                    <li><strong>Ítem:</strong> es la unidad básica de información, compuesta por metadatos, archivos y condiciones de acceso. Puede incluir PDF, imágenes, videos y más.</li>
+                  </ul>
                 </Card>
+                <div className="callout green bigCallout">
+                  <strong>Buena práctica</strong>
+                  <p>Una buena estructura en DSpace debe ser clara, comprensible y fácil de navegar. Evita crear jerarquías demasiado profundas que dificulten la navegación del usuario. Prioriza estructuras claras y orientadas a la búsqueda.</p>
+                </div>
               </motion.section>
             )}
 
@@ -589,7 +589,7 @@ function App() {
                     <p>Colección → Formulario de depósito → Campos de metadatos → Ítem descrito.</p>
                   </div>
                   <h3 className="spaced">Buenas prácticas para formularios</h3>
-                  <ul className="niceList">
+                  <ul className="bulletList">
                     <li>Define campos obligatorios mínimos y evita formularios excesivamente largos.</li>
                     <li>Usa vocabularios controlados cuando sea posible.</li>
                     <li>Separa campos descriptivos, administrativos, técnicos y de derechos.</li>
