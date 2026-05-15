@@ -16,49 +16,108 @@ import {
   Pencil,
   Trash2,
   Sparkles,
-  ClipboardCheck
+  ClipboardCheck,
+  Image as ImageIcon,
+  ExternalLink,
+  FormInput,
+  Tags,
+  LibraryBig,
+  KeyRound
 } from "lucide-react";
 import "./styles.css";
 
 const sections = [
   { id: "inicio", title: "Inicio", icon: BookOpen },
-  { id: "jerarquia", title: "Jerarquía DSpace", icon: Layers3 },
+  { id: "jerarquia", title: "Comunidades y colecciones", icon: Layers3 },
   { id: "crear", title: "Crear comunidad", icon: Settings2 },
-  { id: "editar", title: "Editar y administrar", icon: Pencil },
+  { id: "editar", title: "Editar comunidad", icon: Pencil },
   { id: "metadatos", title: "Metadatos y Dublin Core", icon: Database },
+  { id: "formularios", title: "Formularios", icon: FormInput },
+  { id: "recursos", title: "Recursos oficiales", icon: ExternalLink },
   { id: "actividad", title: "Actividad final", icon: Trophy },
 ];
 
 const hierarchyCards = [
   {
     label: "Comunidad",
-    description: "Primer nivel visible del repositorio. Suele representar una facultad, instituto, departamento, centro o gran área institucional.",
+    description: "Primer nivel visible del repositorio. Puede representar una facultad, instituto, centro, departamento amplio o área institucional.",
     example: "Ejemplo: Facultad de Ciencias Sociales",
   },
   {
     label: "Subcomunidad",
-    description: "Nivel opcional que ayuda a organizar una comunidad cuando existe una estructura interna clara.",
+    description: "Nivel opcional que ayuda a organizar una comunidad cuando existe una estructura interna clara. No debe usarse si solo complica la navegación.",
     example: "Ejemplo: Departamento de Sociología",
   },
   {
     label: "Colección",
-    description: "Nivel donde se depositan los ítems. Puede agrupar tesis, artículos, libros, datos, videos u otros tipos documentales.",
-    example: "Ejemplo: Artículos científicos",
+    description: "Nivel donde se depositan los ítems. Agrupa contenidos con una lógica documental, administrativa o temática.",
+    example: "Ejemplo: Artículos científicos, Tesis, Datos de investigación",
   },
   {
     label: "Ítem",
-    description: "Unidad básica de información. Incluye metadatos, archivos y condiciones de acceso.",
+    description: "Unidad básica de información. Incluye metadatos, uno o más archivos, licencias y condiciones de acceso.",
     example: "Ejemplo: Un artículo con PDF, resumen, autores, fecha y palabras clave",
   },
 ];
 
-const createSteps = [
-  "Iniciar sesión con una cuenta autorizada.",
-  "Ir al botón Nuevo o al signo + del menú de administración.",
-  "Seleccionar Nuevo → Comunidad.",
-  "Elegir si será una comunidad principal o una subcomunidad dentro de otra comunidad.",
-  "Completar el formulario: nombre, descripción, texto introductorio, logotipo, noticias y derechos.",
-  "Guardar y verificar el mensaje de confirmación.",
+const createImageSteps = [
+  {
+    title: "1. Iniciar sesión",
+    text: "Entra con una cuenta que tenga permisos de administración. Si no ves el menú de administración, solicita revisión de permisos.",
+    image: "/images/01-login.svg",
+    alt: "Captura de pantalla sugerida: ventana de inicio de sesión en DSpace"
+  },
+  {
+    title: "2. Abrir Nuevo → Comunidad",
+    text: "Desde el signo + o el menú Nuevo, selecciona la opción Comunidad para comenzar el proceso de creación.",
+    image: "/images/02-nueva-comunidad.svg",
+    alt: "Captura sugerida: menú Nuevo y opción Comunidad"
+  },
+  {
+    title: "3. Elegir comunidad principal o subcomunidad",
+    text: "Puedes crear una comunidad de nivel superior o buscar una comunidad padre para crear una subcomunidad dentro de ella.",
+    image: "/images/03-seleccionar-padre.svg",
+    alt: "Captura sugerida: selector de comunidad padre"
+  },
+  {
+    title: "4. Completar el formulario",
+    text: "Registra nombre, logotipo, texto introductorio, descripción breve, derechos de autor y noticias. El nombre suele ser el único campo obligatorio.",
+    image: "/images/04-formulario-comunidad.svg",
+    alt: "Captura sugerida: formulario de creación de comunidad"
+  },
+  {
+    title: "5. Guardar y verificar",
+    text: "Al guardar, DSpace debe mostrar un mensaje de éxito y redirigir a la página de la comunidad.",
+    image: "/images/05-confirmacion.svg",
+    alt: "Captura sugerida: mensaje de confirmación"
+  },
+];
+
+const editImageSteps = [
+  {
+    title: "1. Entrar a la comunidad",
+    text: "Ubica la comunidad que deseas administrar. También puedes buscarla desde el menú Editar → Comunidad.",
+    image: "/images/06-editar-menu.svg",
+    alt: "Captura sugerida: acceso al menú de edición"
+  },
+  {
+    title: "2. Usar el ícono de lápiz o Editar → Comunidad",
+    text: "El ícono de lápiz permite abrir la edición directamente desde la página de la comunidad.",
+    image: "/images/07-icono-lapiz.svg",
+    alt: "Captura sugerida: botón de lápiz para editar comunidad"
+  },
+  {
+    title: "3. Revisar las pestañas de administración",
+    text: "Las pestañas agrupan acciones: metadatos, roles, curación, control de acceso y autorizaciones.",
+    image: "/images/08-pestanas-edicion.svg",
+    alt: "Captura sugerida: pestañas de edición de comunidad"
+  },
+  {
+    title: "4. Revisar permisos antes de cambios críticos",
+    text: "Antes de eliminar o modificar acceso, valida quién administra la comunidad y qué colecciones o ítems dependen de ella.",
+    image: "/images/09-control-acceso.svg",
+    alt: "Captura sugerida: control de acceso y autorizaciones"
+  },
 ];
 
 const editTabs = [
@@ -84,7 +143,7 @@ const editTabs = [
   },
   {
     title: "Autorizaciones",
-    icon: Settings2,
+    icon: KeyRound,
     text: "Crea, edita o elimina políticas específicas para usuarios y grupos.",
   },
   {
@@ -106,18 +165,56 @@ const metadataExamples = [
   ["dc.identifier.uri", "Identificador o enlace persistente"],
 ];
 
+const officialLinks = [
+  {
+    title: "DSpace 7.x Documentation",
+    text: "Página principal de documentación técnica y funcional de DSpace 7.x en la wiki de Lyrasis.",
+    href: "https://wiki.lyrasis.org/display/DSDOC7x/DSpace+7.x+Documentation"
+  },
+  {
+    title: "User Interface",
+    text: "Documentación sobre la interfaz de usuario de DSpace 7.",
+    href: "https://wiki.lyrasis.org/display/DSDOC7x/User+Interface"
+  },
+  {
+    title: "Submission User Interface",
+    text: "Referencia para comprender el flujo de envío o depósito de ítems.",
+    href: "https://wiki.lyrasis.org/display/DSDOC7x/Submission+User+Interface"
+  },
+  {
+    title: "Metadata and Bitstream Format Registries",
+    text: "Información sobre registros de metadatos y formatos de archivos.",
+    href: "https://wiki.lyrasis.org/display/DSDOC7x/Metadata+and+Bitstream+Format+Registries"
+  },
+  {
+    title: "Configuration Reference",
+    text: "Referencia general de configuración para instalaciones DSpace.",
+    href: "https://wiki.lyrasis.org/display/DSDOC7x/Configuration+Reference"
+  },
+  {
+    title: "DSpace official website",
+    text: "Sitio oficial del programa DSpace.",
+    href: "https://dspace.org/"
+  },
+  {
+    title: "Proyecto LA Referencia – Lyrasis",
+    text: "Iniciativa regional con documentación, capacitación y soporte para DSpace en América Latina y España.",
+    href: "https://dspace.lareferencia.info/"
+  },
+];
+
 const quiz = [
   {
     question: "¿En qué nivel de DSpace se depositan directamente los ítems?",
     options: ["Comunidad", "Subcomunidad", "Colección", "Página de inicio"],
     answer: "Colección",
-    explanation: "Los ítems se depositan dentro de colecciones. Las comunidades y subcomunidades sirven para organizar la estructura.",
+    explanation: "Los ítems se depositan dentro de colecciones. Las comunidades y subcomunidades organizan la estructura.",
   },
   {
     question: "¿Qué contiene un ítem en DSpace?",
     options: ["Solo un archivo", "Metadatos y uno o más archivos", "Solo una descripción", "Una comunidad completa"],
     answer: "Metadatos y uno o más archivos",
-    explanation: "El ítem es la unidad básica de información y normalmente incluye metadatos, archivos, licencias y condiciones de acceso.",
+    explanation: "El ítem es la unidad básica de información e incluye metadatos, archivos, licencias y condiciones de acceso.",
   },
   {
     question: "¿Cuál es una buena práctica al crear jerarquías?",
@@ -131,6 +228,12 @@ const quiz = [
     answer: "dc.contributor.author",
     explanation: "En DSpace, dc.contributor.author se utiliza comúnmente para registrar autoras y autores.",
   },
+  {
+    question: "¿Para qué sirve un formulario de depósito?",
+    options: ["Para cambiar el color del sitio", "Para capturar metadatos durante el envío de un ítem", "Para borrar comunidades", "Para crear usuarios automáticamente"],
+    answer: "Para capturar metadatos durante el envío de un ítem",
+    explanation: "El formulario guía la captura de metadatos según la colección o el tipo documental.",
+  },
 ];
 
 const checklistItems = [
@@ -142,6 +245,7 @@ const checklistItems = [
   "El formulario de depósito corresponde al tipo documental.",
   "Los permisos fueron revisados.",
   "La descripción breve puede ser entendida por usuarios externos.",
+  "Se incluyeron enlaces de referencia para consulta posterior.",
 ];
 
 function Card({ children, className = "" }) {
@@ -201,6 +305,43 @@ function FlipCard({ item }) {
         )}
       </AnimatePresence>
     </motion.button>
+  );
+}
+
+function ImageStep({ step }) {
+  return (
+    <Card className="imageStep">
+      <div className="imageWrap">
+        <img src={step.image} alt={step.alt} />
+      </div>
+      <div>
+        <h3>{step.title}</h3>
+        <p>{step.text}</p>
+        <p className="imageNote"><ImageIcon size={15} /> Puedes reemplazar esta imagen por una captura real del repositorio.</p>
+      </div>
+    </Card>
+  );
+}
+
+function MetadataConcepts() {
+  return (
+    <div className="grid3">
+      <div className="softBox concept">
+        <Database />
+        <h4>Metadatos</h4>
+        <p>Son datos que describen un recurso. Permiten identificar, buscar, recuperar, preservar e interoperar los contenidos del repositorio.</p>
+      </div>
+      <div className="softBox concept">
+        <LibraryBig />
+        <h4>Esquemas</h4>
+        <p>Son conjuntos organizados de campos. En DSpace pueden coexistir Dublin Core, DataCite, MODS u otros esquemas institucionales.</p>
+      </div>
+      <div className="softBox concept">
+        <Tags />
+        <h4>Dublin Core</h4>
+        <p>Es el esquema más común para describir recursos digitales. En DSpace se usa con campos como dc.title, dc.subject o dc.contributor.author.</p>
+      </div>
+    </div>
   );
 }
 
@@ -283,10 +424,12 @@ function App() {
 
   const titles = {
     inicio: "Manual interactivo · Sesión 1",
-    jerarquia: "Comunidad → Subcomunidad → Colección → Ítem",
-    crear: "Cómo crear una comunidad",
-    editar: "Editar, administrar y eliminar comunidades",
-    metadatos: "Metadatos, esquemas, formularios y Dublin Core",
+    jerarquia: "Comunidades, subcomunidades y colecciones",
+    crear: "Proceso ilustrado: crear una comunidad",
+    editar: "Proceso ilustrado: editar una comunidad",
+    metadatos: "Introducción a metadatos, esquemas y Dublin Core",
+    formularios: "Formularios en el repositorio",
+    recursos: "Enlaces oficiales y documentación",
     actividad: "Actividad de cierre",
   };
 
@@ -335,6 +478,10 @@ function App() {
                     <strong>Idea clave</strong>
                     <p>Una buena administración del repositorio no consiste solo en cargar archivos. Consiste en construir una arquitectura clara de información.</p>
                   </div>
+                  <div className="callout blue">
+                    <strong>Novedad de esta versión</strong>
+                    <p>Se agregaron espacios para capturas de pantalla, enlaces oficiales de consulta y una sección ampliada de metadatos, esquemas, Dublin Core y formularios.</p>
+                  </div>
                 </Card>
               </motion.section>
             )}
@@ -350,35 +497,21 @@ function App() {
                     {hierarchyCards.map((item) => <FlipCard key={item.label} item={item} />)}
                   </div>
                   <div className="callout rose">
-                    <strong>Evita este error</strong>
-                    <p>No crees jerarquías demasiado profundas. Una estructura muy compleja puede dificultar la navegación.</p>
+                    <strong>Buena práctica</strong>
+                    <p>Evita crear jerarquías demasiado profundas. Prioriza estructuras claras, sostenibles y orientadas a la búsqueda.</p>
                   </div>
                 </Card>
               </motion.section>
             )}
 
             {active === "crear" && (
-              <motion.section key="crear" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
-                <Card>
-                  <h3>Ruta rápida para crear una comunidad</h3>
-                  <div className="steps">
-                    {createSteps.map((step, idx) => (
-                      <div key={step} className="step">
-                        <div>{idx + 1}</div>
-                        <p>{step}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid2">
-                    <div className="softBox"><h4>Comunidad principal</h4><p>Se crea en el primer nivel visible del repositorio.</p></div>
-                    <div className="softBox"><h4>Subcomunidad</h4><p>Se crea dentro de una comunidad o subcomunidad ya existente.</p></div>
-                  </div>
-                </Card>
+              <motion.section key="crear" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="stack">
+                {createImageSteps.map((step) => <ImageStep key={step.title} step={step} />)}
               </motion.section>
             )}
 
             {active === "editar" && (
-              <motion.section key="editar" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
+              <motion.section key="editar" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="stack">
                 <div className="grid2">
                   {editTabs.map((tab) => {
                     const Icon = tab.icon;
@@ -391,25 +524,98 @@ function App() {
                     );
                   })}
                 </div>
+                {editImageSteps.map((step) => <ImageStep key={step.title} step={step} />)}
               </motion.section>
             )}
 
             {active === "metadatos" && (
               <motion.section key="metadatos" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
                 <Card>
-                  <h3>Metadatos: datos que describen datos</h3>
-                  <p>Los metadatos permiten identificar, organizar, recuperar, interoperar y preservar los ítems del repositorio.</p>
-                  <div className="grid3">
-                    <div className="softBox"><h4>Esquema</h4><p>Conjunto organizado de campos para describir recursos.</p></div>
-                    <div className="softBox"><h4>Formulario</h4><p>Interfaz donde se capturan los metadatos al depositar un ítem.</p></div>
-                    <div className="softBox"><h4>Dublin Core</h4><p>Estándar ampliamente usado para describir recursos digitales.</p></div>
+                  <h3>Metadatos: datos que describen recursos</h3>
+                  <p>
+                    Los metadatos son información estructurada que permite identificar, describir, recuperar, administrar,
+                    preservar e intercambiar recursos dentro y fuera del repositorio.
+                  </p>
+                  <MetadataConcepts />
+                  <div className="callout blue">
+                    <strong>¿Por qué importan?</strong>
+                    <p>Un archivo sin buenos metadatos puede estar depositado, pero será más difícil de encontrar, citar, interoperar o reutilizar.</p>
                   </div>
+                  <h3 className="spaced">Campos Dublin Core frecuentes</h3>
                   <table>
                     <thead><tr><th>Campo</th><th>Uso</th></tr></thead>
                     <tbody>
                       {metadataExamples.map(([field, use]) => <tr key={field}><td><code>{field}</code></td><td>{use}</td></tr>)}
                     </tbody>
                   </table>
+                  <div className="grid2">
+                    <div className="softBox">
+                      <h4>Esquema simple</h4>
+                      <p>Usa elementos generales para describir recursos, por ejemplo título, autor, fecha o materia.</p>
+                    </div>
+                    <div className="softBox">
+                      <h4>Esquema calificado</h4>
+                      <p>Añade precisión mediante calificadores, por ejemplo dc.contributor.author o dc.description.abstract.</p>
+                    </div>
+                  </div>
+                </Card>
+              </motion.section>
+            )}
+
+            {active === "formularios" && (
+              <motion.section key="formularios" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
+                <Card>
+                  <h3>¿Qué son los formularios de depósito?</h3>
+                  <p>
+                    Los formularios son las pantallas mediante las cuales las personas capturan metadatos al depositar un ítem.
+                    En una configuración institucional, pueden adaptarse por colección, tipo documental o necesidades descriptivas.
+                  </p>
+                  <div className="grid3">
+                    <div className="softBox">
+                      <h4>Tesis</h4>
+                      <p>Autor, título, director, programa académico, fecha de defensa, resumen, palabras clave.</p>
+                    </div>
+                    <div className="softBox">
+                      <h4>Artículo</h4>
+                      <p>Autor, título, revista, DOI, fecha de publicación, volumen, número, páginas, resumen.</p>
+                    </div>
+                    <div className="softBox">
+                      <h4>Datos de investigación</h4>
+                      <p>Autor, título, descripción, metodología, cobertura temporal, licencia, identificador.</p>
+                    </div>
+                  </div>
+                  <div className="callout amber">
+                    <strong>Relación clave</strong>
+                    <p>Colección → Formulario de depósito → Campos de metadatos → Ítem descrito.</p>
+                  </div>
+                  <h3 className="spaced">Buenas prácticas para formularios</h3>
+                  <ul className="niceList">
+                    <li>Define campos obligatorios mínimos y evita formularios excesivamente largos.</li>
+                    <li>Usa vocabularios controlados cuando sea posible.</li>
+                    <li>Separa campos descriptivos, administrativos, técnicos y de derechos.</li>
+                    <li>Adapta el formulario al tipo documental de la colección.</li>
+                    <li>Documenta reglas de captura para autores, fechas, títulos e identificadores.</li>
+                  </ul>
+                </Card>
+              </motion.section>
+            )}
+
+            {active === "recursos" && (
+              <motion.section key="recursos" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}>
+                <Card>
+                  <h3>Enlaces de consulta para reforzar la sesión</h3>
+                  <p>Usa estos enlaces como referencias de apoyo para administradores, bibliotecarios y equipos técnicos.</p>
+                  <div className="linkGrid">
+                    {officialLinks.map((link) => (
+                      <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="resourceLink">
+                        <div>
+                          <strong>{link.title}</strong>
+                          <p>{link.text}</p>
+                        </div>
+                        <ExternalLink size={18} />
+                      </a>
+                    ))}
+                  </div>
                 </Card>
               </motion.section>
             )}

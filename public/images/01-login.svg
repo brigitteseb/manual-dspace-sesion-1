@@ -1,0 +1,15 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="760" rx="38" fill="#F8FAFC"/>
+<rect x="58" y="58" width="1084" height="644" rx="30" fill="white" stroke="#CBD5E1" stroke-width="4"/>
+<rect x="58" y="58" width="1084" height="86" rx="30" fill="#0f172a"/>
+<circle cx="108" cy="101" r="15" fill="#FCA5A5"/>
+<circle cx="154" cy="101" r="15" fill="#FDE68A"/>
+<circle cx="200" cy="101" r="15" fill="#86EFAC"/>
+<rect x="110" y="210" width="980" height="64" rx="16" fill="#E2E8F0"/>
+<rect x="110" y="304" width="580" height="42" rx="12" fill="#CBD5E1"/>
+<rect x="110" y="372" width="820" height="42" rx="12" fill="#CBD5E1"/>
+<rect x="110" y="440" width="720" height="42" rx="12" fill="#CBD5E1"/>
+<rect x="110" y="540" width="270" height="70" rx="18" fill="#0f172a"/>
+<text x="600" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="800" fill="#0F172A">Inicio de sesión</text>
+<text x="600" y="650" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="600" fill="#475569">Reemplaza por captura real del login</text>
+</svg>
