@@ -144,13 +144,13 @@ const metadataExamples = [
 
 const officialLinks = [
   {
-    title: "DSpace 7.x Documentation",
-    text: "Página principal de documentación técnica y funcional de DSpace 7.x en la wiki de Lyrasis.",
+    title: "DSpace 8.x Documentation",
+    text: "Página principal de documentación técnica y funcional de DSpace 8.x en la wiki de Lyrasis.",
     href: "https://wiki.lyrasis.org/display/DSDOC7x/DSpace+7.x+Documentation"
   },
   {
     title: "User Interface",
-    text: "Documentación sobre la interfaz de usuario de DSpace 7.",
+    text: "Documentación sobre la interfaz de usuario de DSpace 8.",
     href: "https://wiki.lyrasis.org/display/DSDOC7x/User+Interface"
   },
   {
