@@ -144,13 +144,13 @@ const metadataExamples = [
 
 const officialLinks = [
   {
-    title: "DSpace 8.x Documentation",
-    text: "Página principal de documentación técnica y funcional de DSpace 8.x en la wiki de Lyrasis.",
+    title: "DSpace 7.x Documentation",
+    text: "Página principal de documentación técnica y funcional de DSpace 7.x en la wiki de Lyrasis.",
     href: "https://wiki.lyrasis.org/display/DSDOC7x/DSpace+7.x+Documentation"
   },
   {
     title: "User Interface",
-    text: "Documentación sobre la interfaz de usuario de DSpace 8.",
+    text: "Documentación sobre la interfaz de usuario de DSpace 7.",
     href: "https://wiki.lyrasis.org/display/DSDOC7x/User+Interface"
   },
   {
@@ -263,23 +263,8 @@ function SectionButton({ section, active, onClick }) {
 
 function TopTrainingHeader() {
   return (
-    <div className="trainingHeader">
-      <div className="trainingHeaderOverlay" />
-      <div className="trainingHeaderContent">
-        <div>
-          <p className="miniLabel">Material didáctico</p>
-          <h1>Formación operativa<br />en repositorio DSpace</h1>
-        </div>
-        <div className="headerDecor">
-          <div className="mockLaptop">
-            <div className="mockScreen"></div>
-            <div className="mockTrackpad"></div>
-          </div>
-          <div className="hexWrap">
-            {Array.from({ length: 8 }).map((_, i) => <span key={i}></span>)}
-          </div>
-        </div>
-      </div>
+    <div className="trainingHeaderImage">
+      <img src="/images/banner-dspace.png" alt="Formación operativa en repositorio DSpace. Material didáctico." />
     </div>
   );
 }

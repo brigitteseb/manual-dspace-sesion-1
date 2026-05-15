@@ -34,3 +34,8 @@ Si quieres, después podemos:
 ## Ajuste V3.1
 
 La tarjeta de **Objetivo del material** queda como bloque independiente al inicio del manual, no integrada dentro del apartado de contenidos a revisar.
+
+
+## Ajuste V3.2
+
+Se reemplazó el banner generado por código por la imagen real `public/images/banner-dspace.png` proporcionada para el encabezado del manual.
